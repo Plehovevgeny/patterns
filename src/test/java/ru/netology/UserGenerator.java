@@ -10,11 +10,9 @@ public class UserGenerator {
 
     public static DataUser generateUser(int changeDay) {
         String city = generateCity();
-        String date = generateDate(changeDay);
         String name = generateName();
         String phone = generatePhone();
-        DataUser user = new DataUser(city, date, name, phone);
-        return user;
+        return new DataUser(city, name, phone);
     }
 
     public static String generateCity() {
@@ -26,23 +24,19 @@ public class UserGenerator {
         };
         Faker faker = new Faker();
         int index = faker.number().numberBetween(0, cities.length -1);
-        String city = cities[index];
-        return city;
+        return cities[index];
     }
 
     public static String generateDate(int changeDays){
-        String meetDay = LocalDate.now().plusDays(changeDays).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        return meetDay;
+        return LocalDate.now().plusDays(changeDays).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
     public static String generateName(){
         Faker faker = new Faker(new Locale("ru"));
-        String name = faker.name().lastName() + " " + faker.name().firstName();
-        return name;
+        return faker.name().lastName() + " " + faker.name().firstName();
     }
     public static String generatePhone(){
         Faker faker = new Faker(new Locale("ru"));
-        String phone = faker.phoneNumber().phoneNumber();
-        return phone;
+        return faker.phoneNumber().phoneNumber();
     }
 }

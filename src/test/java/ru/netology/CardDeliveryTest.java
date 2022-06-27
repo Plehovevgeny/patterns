@@ -28,7 +28,7 @@ public class CardDeliveryTest {
         DataUser user = UserGenerator.generateUser(6);
         form.$x(".//input[@placeholder=\"Город\"]").val(user.getCity());
         form.$x(".//span[@data-test-id='date']//input[@class='input__control']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        form.$x(".//span[@data-test-id='date']//input[@class='input__control']").val(user.getDate());
+        form.$x(".//span[@data-test-id='date']//input[@class='input__control']").val(UserGenerator.generateDate(6));
         form.$x(".//input[@name=\"name\"]").val(user.getName());
         form.$x(".//input[@name=\"phone\"]").val(user.getPhone());
         form.$x(".//span[@class=\"checkbox__box\"]").click();
@@ -36,7 +36,7 @@ public class CardDeliveryTest {
 
         success.should(visible, Duration.ofSeconds(15));
         success.$x(".//div[@class='notification__content']").should(text("Встреча успешно запланирована на " +
-                user.getDate()));
+                UserGenerator.generateDate(6)));
         success.$x(".//button").click();
         success.should(hidden);
 
